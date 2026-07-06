@@ -2,227 +2,155 @@
 <html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Beez-i Elite — Réseau de Discipline & Productivité</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beez-i Elite - Ruche de Productivité</title>
     
     <link rel="stylesheet" href="style.css">
-
-    <link rel="manifest" href="manifest.json">
-
+    
     <link rel="manifest" href="manifest.json">
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Beez-i">
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <aside class="sidebar" id="app-sidebar">
+    <header class="main-header">
+        <div class="header-container">
             <div class="logo-area">
-                <div class="bee-logo-subliminal"></div>
-                <h1>Beez-i Elite</h1>
+                <span class="bee-icon">🐝</span>
+                <h1 class="brand-title">Beez-i <span class="gold-text">Elite</span></h1>
+            </div>
+            <div class="user-badge-profile">
+                <span id="user-avatar-display">🧬</span>
+                <span id="user-pseudo-display" class="gold-text">Abeille...</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main-content">
+
+        <section id="view-dashboard" class="view-section">
+            <div id="community-welcome-banner" class="welcome-premium-banner">
+                <div class="banner-content">
+                    <h2>👑 Devenez une Force Souveraine</h2>
+                    <p>Rejoignez les pôles d'émulation, créez des micro-communautés blindées et lancez des débats chronométrés sous arbitrage de l'IA.</p>
+                </div>
+                <button onclick="BeezCommunity.dismissBanner()" class="btn-dismiss">✕</button>
+            </div>
+
+            <div class="section-header-flex">
+                <h2>📊 Vos Constantes de Discipline</h2>
+                <span class="badge-status">Actif</span>
             </div>
             
-            <div class="profile-badge-header" onclick="BeezUI.openModal('profile-modal')">
-                <div class="avatar-wrapper">
-                    <span id="user-avatar-display" style="font-size: 1.4rem; display: flex; justify-content: center; align-items: center; height: 100%;">🧬</span>
+            <div class="stats-grid-dashboard">
+                <div class="stat-mini-card">
+                    <span class="stat-icon">🔥</span>
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Focus Synaptique</div>
                 </div>
-                <div style="text-align: left; flex-grow: 1; margin-left: 10px;">
-                    <div id="user-pseudo-display" style="font-weight: 700; font-size: 0.9rem;">Abeille Alpha</div>
-                    <div style="font-size: 0.75rem; color: var(--color-gold);">Statut : En Ligne</div>
+                <div class="stat-mini-card">
+                    <span class="stat-icon">👑</span>
+                    <div class="stat-value">Élite</div>
+                    <div class="stat-label">Statut Matricule</div>
                 </div>
             </div>
+        </section>
 
-            <nav class="nav-menu">
-                <button onclick="BeezUI.switchView('dashboard')" id="nav-dashboard" class="nav-item active">🏠 <span>Mon tableau de bord</span></button>
-                <button onclick="BeezUI.switchView('agenda')" id="nav-agenda" class="nav-item">📅 <span>Mon Agenda</span></button>
-                <button onclick="BeezUI.switchView('tasks')" id="nav-tasks" class="nav-item">✅ <span>Mes tâches</span></button>
-                <button onclick="BeezUI.switchView('community')" id="nav-community" class="nav-item">👥 <span>Communautés</span></button>
-                <button onclick="BeezUI.switchView('live')" id="nav-live" class="nav-item">🎙️ <span>Sessions Live</span></button>
-                <button onclick="BeezUI.switchView('analytics')" id="nav-analytics" class="nav-item">📊 <span>Mes Statistiques</span></button>
-                <button onclick="BeezUI.switchView('security')" id="nav-security" class="nav-item">⚙️ <span>Paramètres</span></button>
-            </nav>
-        </aside>
+        <section id="view-community" class="view-section" style="display: none;">
+            <div class="section-header-flex">
+                <h2>👥 Vos Boîtes d'Émulation Active</h2>
+                <button onclick="BeezUI.openModal('community-modal')" class="btn-premium" style="width: auto; margin: 0;">➕ Fonder un Pôle</button>
+            </div>
+            <div id="communities-grid-container" class="communities-grid"></div>
+        </section>
 
-        <main class="content-container">
+        <section id="view-live" class="view-section" style="display: none;">
+            <div class="section-header-flex">
+                <h2>🎙️ Salons de Concentration & Débats</h2>
+            </div>
+            <div class="live-empty-state">
+                <div class="live-pulse-radar"></div>
+                <h3>Aucun débat conflictuel actif</h3>
+                <p style="color: var(--color-muted); max-width: 400px; margin: 10px auto 20px;">
+                    Entrez dans une boîte de communauté ci-dessus pour initier une session vocale WebRTC avec vos pairs sous arbitrage de l'IA.
+                </p>
+            </div>
+        </section>
+
+        <section id="view-agenda" class="view-section" style="display: none;">
+            <div class="section-header-flex">
+                <h2>📅 Itinéraire Chrono-Mental</h2>
+            </div>
+            </section>
+
+        <section id="view-tasks" class="view-section" style="display: none;">
+            <div class="section-header-flex">
+                <h2>🔒 Actions de Focus Isolées</h2>
+            </div>
+            <div id="tasks-container"></div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-dock-nav">
+        <button id="nav-dashboard" class="nav-item active" onclick="BeezUI.switchView('dashboard')">
+            <span class="nav-icon">📊</span><span class="nav-text">Focus</span>
+        </button>
+        <button id="nav-community" class="nav-item" onclick="BeezUI.switchView('community')">
+            <span class="nav-icon">👥</span><span class="nav-text">Boîtes</span>
+        </button>
+        <button id="nav-live" class="nav-item" onclick="BeezUI.switchView('live')">
+            <span class="nav-icon">🎙️</span><span class="nav-text">Lives</span>
+        </button>
+        <button id="nav-agenda" class="nav-item" onclick="BeezUI.switchView('agenda')">
+            <span class="nav-icon">🗺️</span><span class="nav-text">Itinéraire</span>
+        </button>
+        <button id="nav-tasks" class="nav-item" onclick="BeezUI.switchView('tasks')">
+            <span class="nav-icon">🔒</span><span class="nav-text">Actions</span>
+        </button>
+    </nav>
+
+    <div id="community-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Fonder une Communauté d'Émulation</h3>
+            <p style="color: var(--color-muted); font-size: 0.8rem; margin-bottom: 15px;">Établissez un pôle d'entraide souverain.</p>
             
-            <header class="top-bar" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <div class="ai-speech-bubble" id="ai-banner" style="background: rgba(0, 229, 255, 0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.2); width: 100%;">
-                    <span class="sparkle">✨</span> <strong>Garde-Fou IA (Meta-Llama-3) :</strong> Prêt pour l'analyse comportementale.
-                </div>
-            </header>
+            <input type="text" id="comm-name" placeholder="Nom du pôle (ex: Codeurs Inflexibles)" class="premium-input">
+            <textarea id="comm-desc" placeholder="Objectif collectif et règles de sanctions de la communauté..." class="premium-input" style="height: 80px; resize: none;"></textarea>
+            
+            <select id="comm-access-type" class="premium-input" onchange="BeezCommunity.togglePriceInput()">
+                <option value="public">🌍 Accès Public (Gratuit)</option>
+                <option value="paid">👑 Accès Premium / Payant</option>
+            </select>
+            
+            <div id="comm-price-zone" style="display: none; margin-top: 10px;">
+                <input type="number" id="comm-price" placeholder="Prix d'entrée (en EUR)" class="premium-input" value="15">
+            </div>
 
-            <section id="view-dashboard" class="view-section active">
-                <div style="margin-bottom: 24px;">
-                    <h2>Mon Centre de Contrôle</h2>
-                    <p style="color: var(--color-muted); font-size: 0.9rem;">Mesures d'urgence et indices de focus.</p>
-                </div>
-                
-                <div class="grid-layout" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-                    <div class="card" style="background: var(--color-surface); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
-                        <h3 style="color: var(--color-muted); font-size: 0.9rem;">Actions Restantes</h3>
-                        <p class="big-stat" id="stat-pending" style="font-size: 2.5rem; font-weight: 800; margin-top: 10px; color: var(--color-blue);">0</p>
-                    </div>
-                    <div class="card" style="background: var(--color-surface); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
-                        <h3 style="color: var(--color-muted); font-size: 0.9rem;">Objectifs Validés</h3>
-                        <p class="big-stat" id="stat-completed" style="font-size: 2.5rem; font-weight: 800; margin-top: 10px; color: var(--color-gold);">0</p>
-                    </div>
-                    <div class="card" style="background: var(--color-surface); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.04);">
-                        <h3 style="color: var(--color-muted); font-size: 0.9rem;">Indice de Vigilance</h3>
-                        <p class="big-stat" id="binome-alert-level" style="font-size: 2.5rem; font-weight: 800; margin-top: 10px; color: var(--color-green);">Sain</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="view-agenda" class="view-section" style="display:none;">
-                <div style="margin-bottom: 20px;">
-                    <h2>📅 Mon Agenda Stratégique</h2>
-                    <p style="color: var(--color-muted); font-size: 0.9rem;">Feuille de route horaire modélisée par Checkpoints routiers.</p>
-                </div>
-                </section>
-
-            <section id="view-tasks" class="view-section" style="display:none;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2>✅ Mes Tâches Collaboratives</h2>
-                    <button class="btn-gold" style="width: auto; margin: 0; padding: 10px 16px;" onclick="BeezUI.openModal('task-modal')">➕ Planifier une Action</button>
-                </div>
-                <div id="tasks-container"></div>
-            </section>
-
-            <section id="view-community" class="view-section" style="display:none;">
-                <div id="community-welcome-banner" class="suspended-banner">
-                    <p style="font-size: 0.9rem; font-weight: 600; color: var(--color-text-pure);">💡 Créez ou rejoignez une communauté pour vous aider à atteindre vos objectifs.</p>
-                    <button onclick="BeezCommunity.dismissBanner()" class="close-banner-btn">×</button>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-                    <h2>👥 Communautés d'Émulation</h2>
-                    <button onclick="BeezUI.openModal('community-modal')" class="btn-gold" style="width: auto; margin: 0; padding: 10px 16px;">🏗️ Fonder une Communauté</button>
-                </div>
-
-                <div id="communities-grid-container" class="communities-boxes-grid"></div>
-            </section>
-
-            <section id="view-live" class="view-section" style="display:none;">
-                <div style="margin-bottom: 20px;">
-                    <h2>🎙️ Salon de Visioconférence & Débats</h2>
-                    <p style="color: var(--color-muted); font-size: 0.9rem;">Interaction temps réel cryptée de bout en bout.</p>
-                </div>
-                <div class="live-grid" style="background: var(--color-surface); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.04);">
-                    <div style="width: 100%; height: 320px; background: #000; border-radius: 12px; display: flex; justify-content: center; align-items: center;">
-                        <span style="color: var(--color-muted);">Flux WebRTC Multicam Prêt</span>
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                        <button class="btn-gold" style="flex: 1; margin: 0; background: var(--color-surface-light); color: #fff; border: 1px solid rgba(255,255,255,0.1);" onclick="alert('Débat minuté lancé. Temps de parole : 5 min par membre.')">⏱️ Débat & Temps de Parole</button>
-                        <button class="btn-gold" style="flex: 1; margin: 0; background: var(--color-surface-light); color: #fff; border: 1px solid rgba(255,255,255,0.1);" onclick="alert('Méditation collective : Flux d\'ondes Alpha activé. Écrans tamisés.')">🧘 Méditation Musicale</button>
-                        <button class="btn-gold" style="flex: 1; margin: 0;" onclick="alert('Partage d\'écran simultané activé.')">🖥️ Partage Écran Multi-Flux</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="view-analytics" class="view-section" style="display:none;">
-                <h2>📊 Mes Statistiques Centrales</h2>
-                <div class="card" style="background: var(--color-surface); padding: 20px; border-radius: 16px; margin-top: 20px;">
-                    <p style="color: var(--color-muted);">Progression mathématique de la discipline globale.</p>
-                </div>
-            </section>
-
-            <section id="view-security" class="view-section" style="display:none;">
-                <h2>⚙️ Paramètres de la Ruche</h2>
-                
-                <div class="card" style="background: var(--color-surface); padding: 24px; border-radius: 20px; margin-top: 20px; display: flex; flex-direction: column; gap: 20px;">
-                    <div>
-                        <label style="font-weight: 700; font-size: 0.95rem;">Langue de Traduction Native (16 Langues Sélectionnées)</label>
-                        <select id="setting-lang" class="premium-input" onchange="alert('Mise à jour linguistique effectuée.')">
-                            <option value="fr">Français 🇫🇷</option>
-                            <option value="en">English 🇬🇧</option>
-                            <option value="es">Español 🇪🇸</option>
-                            <option value="ar">العربية 🇸🇦</option>
-                            <option value="de">Deutsch 🇩🇪</option>
-                            <option value="pt">Português 🇵🇹</option>
-                            <option value="it">Italiano 🇮🇹</option>
-                            <option value="zh">中文 🇨🇳</option>
-                            <option value="ja">日本語 🇯🇵</option>
-                            <option value="ru">Русский 🇷🇺</option>
-                            <option value="hi">हिन्दी 🇮🇳</option>
-                            <option value="sw">Kiswahili 🇰🇪</option>
-                            <option value="ln">Lingála 🇨🇩</option>
-                            <option value="wo">Wolof 🇸🇳</option>
-                            <option value="tr">Türkçe 🇹🇷</option>
-                            <option value="nl">Nederlands 🇳🇱</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label style="font-weight: 700; font-size: 0.95rem;">Focalisation Visuelle (Thème Énergétique)</label>
-                        <select id="setting-theme" class="premium-input" onchange="appState.theme = this.value; BeezCore.applyTheme(); localStorage.setItem('beez_theme', this.value);">
-                            <option value="dark">Sombre Ébène (Dalle OLED Énergie)</option>
-                            <option value="light">Clair High-Contrast (Plein Soleil / Anti-Fatigue)</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-        </main>
+            <button onclick="BeezCommunity.createCommunity()" class="btn-premium" style="margin-top: 20px;">⚡ Sceller la fondation</button>
+            <button onclick="BeezUI.closeModal('community-modal')" class="btn-gold" style="background: transparent; box-shadow: none; border: none; margin-top: 5px; color: var(--color-muted);">Annuler</button>
+        </div>
     </div>
 
     <div id="ia-welcome-modal" class="modal-overlay" style="display: none;">
-        <div class="modal-card init-ia-card">
-            <div class="ia-avatar-pulse">🤖</div>
-            <h3>Analyse d'état initial de la Ruche</h3>
-            <p id="ia-welcome-text" style="line-height: 1.5; color: var(--color-text-pure);">Bonjour Élite Alpha. Avant de déverrouiller vos modules d'accès, détaillez votre état cognitif actuel : <strong>Comment vous sentez-vous réellement aujourd'hui ?</strong></p>
-            
-            <div class="ia-input-zone">
-                <textarea id="ia-mood-input" placeholder="Fatigué, ultra-motivé, distrait par mes notifications... Soyez transparent." style="height: 100px;"></textarea>
-                <button onclick="BeezIA.analyzeInitialMood()" class="btn-premium">Soumettre l'état d'esprit à l'IA</button>
-            </div>
-            
-            <div id="ia-recommendation-zone" style="display: none; margin-top: 20px; padding: 14px; border-left: 3px solid var(--color-blue); background: rgba(0, 229, 255, 0.05); border-radius: 0 12px 12px 12px; text-align: left;">
-                <p id="ia-response-text" style="font-size: 0.9rem; line-height: 1.5;"></p>
-                <div id="ia-action-buttons" style="margin-top: 14px;"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="community-modal" style="display: none;">
         <div class="modal-card">
-            <h3>Fonder un nouveau pôle de soutien</h3>
-            <p style="color: var(--color-muted); font-size: 0.85rem; margin-top: 4px;">Établissez de nouvelles règles de focus partagé.</p>
+            <div class="ia-avatar-pulse">🧬</div>
+            <h3>Contrôle Synaptique Initial</h3>
+            <p style="color: var(--color-muted); font-size: 0.85rem; margin-top: 5px;">
+                Je suis votre IA de discipline. Évaluez honnêtement votre état psychologique actuel avant d'entrer dans la ruche.
+            </p>
             
-            <input type="text" id="comm-name" placeholder="Nom du groupe (ex: Discipline Médicale)" class="premium-input">
-            <textarea id="comm-desc" placeholder="Mission claire du groupe et règles de non-abandon..." class="premium-input" style="height: 80px; margin-top: 12px;"></textarea>
+            <textarea id="ia-mood-input" placeholder="Ex: Je me sens fatigué et un peu distrait aujourd'hui..." class="premium-input" style="height: 70px; margin-top: 15px; resize: none;"></textarea>
             
-            <label style="margin-top: 16px; display: block; font-size: 0.85rem; font-weight: 700; color: var(--color-gold);">Sécurisation des Droits d'Accès</label>
-            <select id="comm-access-type" class="premium-input" style="margin-top: 6px;" onchange="BeezCommunity.togglePriceInput()">
-                <option value="public">Publique (Ouverte à toute la ruche)</option>
-                <option value="restricted">Restreinte (Nombre d'utilisateurs restreint / Invitation)</option>
-                <option value="paid">Payante (Achat obligatoire d'un ticket de membre)</option>
-            </select>
-            
-            <div id="comm-price-zone" style="display: none; margin-top: 12px;">
-                <label style="font-size: 0.85rem; font-weight: 700;">Prix de la place de membre (€)</label>
-                <input type="number" id="comm-price" class="premium-input" value="0" min="0" style="margin-top: 6px;">
+            <div id="ia-recommendation-zone" style="display: none; margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; border-left: 3px solid var(--color-gold);">
+                <p id="ia-response-text" style="font-size: 0.85rem; text-align: left; line-height: 1.4; color: var(--color-text-pure);"></p>
             </div>
 
-            <div style="display: flex; gap: 10px; margin-top: 24px;">
-                <button onclick="BeezUI.closeModal('community-modal')" class="btn-gold" style="margin: 0; background: transparent; border: 1px solid var(--color-muted); color: var(--color-text-pure); flex: 1;">Annuler</button>
-                <button onclick="BeezCommunity.createCommunity()" class="btn-premium" style="margin: 0; flex: 2;">Fonder la Boîte</button>
+            <div id="ia-action-buttons" style="margin-top: 20px; width: 100%;">
+                <button onclick="BeezIA.analyzeInitialMood()" class="btn-premium">Analyse Algorithmique</button>
             </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="profile-modal" style="display: none;">
-        <div class="modal-card" style="text-align: center;">
-            <h3>Mon Profil Élite Chiffré</h3>
-            <p style="color: var(--color-muted); font-size: 0.85rem; margin-top: 4px;">Garantie de stricte confidentialité des données.</p>
-            
-            <div class="avatar-wrapper" style="width: 80px; height: 80px; margin: 20px auto 10px;">
-                <span style="font-size: 2.5rem; display: flex; justify-content: center; align-items: center; height: 100%;">🧬</span>
-            </div>
-            
-            <input type="text" id="profile-pseudo-input" placeholder="Modifier mon Pseudo" class="premium-input" value="Abeille Alpha">
-            <button onclick="alert('Modifications enregistrées de façon anonyme.'); BeezUI.closeModal('profile-modal')" class="btn-premium" style="margin-top: 20px;">Sauvegarder mes identifiants</button>
-            <button onclick="BeezUI.closeModal('profile-modal')" class="btn-gold" style="background: transparent; border: none; color: var(--color-muted); margin-top: 10px; box-shadow: none;">Fermer la fenêtre</button>
         </div>
     </div>
 

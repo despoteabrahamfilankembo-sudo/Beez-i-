@@ -1,0 +1,26 @@
+{
+  "short_name": "Beez-i",
+  "name": "Beez-i Elite - Discipline & Focus",
+  "description": "Le réseau social de la discipline d'élite, de la santé mentale et de l'hyper-productivité.",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%23070709'/><path d='M96 35 L155 69 V137 L96 171 L37 137 V69 Z' fill='none' stroke='%23FFB300' stroke-width='6'/><circle cx='96' cy='103' r='25' fill='%2300E5FF'/></svg>",
+      "type": "image/svg+xml",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23070709'/><path d='M256 90 L414 181 V362 L256 452 L98 362 V181 Z' fill='none' stroke='%23FFB300' stroke-width='14'/><circle cx='256' cy='271' r='65' fill='%2300E5FF'/></svg>",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#070709",
+  "theme_color": "#070709",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["productivity", "social"],
+  "display_override": ["window-controls-overlay", "fullscreen"]
+}

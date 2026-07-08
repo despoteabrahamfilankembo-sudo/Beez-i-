@@ -1,158 +1,267 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beez-i Elite - Ruche de Productivité</title>
-    
+    <title>Beez-i</title>
     <link rel="stylesheet" href="style.css">
-    
     <link rel="manifest" href="manifest.json">
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Beez-i">
 </head>
 <body>
 
+    <!-- MODALE DIAGNOSTIC : ALVÉOLE IRRÉGULIÈRE ET TRANSPARENTE -->
+    <div id="diagnostic-modal" class="modal-overlay">
+        <div class="asymmetric-honeycomb-modal">
+            <button class="close-modal-btn" onclick="BeezUI.closeModal('diagnostic-modal')">✕</button>
+            <h3>Contrôle Synaptique</h3>
+            <p class="modal-question">Comment vous portez-vous aujourd'hui, Abraham ?</p>
+            <div class="diagnostic-responses">
+                <button onclick="BeezUI.closeModal('diagnostic-modal')" class="btn-mood">Productif ⚡</button>
+                <button onclick="BeezUI.closeModal('diagnostic-modal')" class="btn-mood">Fatigué 💤</button>
+                <button onclick="BeezUI.closeModal('diagnostic-modal')" class="btn-mood">Distrait 🧠</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENTÊTE GLOBAL : PROFIL, RECHERCHE & PARAMÈTRES RAPIDES -->
     <header class="main-header">
         <div class="header-container">
-            <div class="logo-area">
-                <span class="bee-icon">🐝</span>
-                <h1 class="brand-title">Beez-i <span class="gold-text">Elite</span></h1>
+            <div class="user-profile-brand">
+                <div class="profile-avatar-wrapper">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150" alt="Abraham F." class="user-main-avatar">
+                    <span class="status-dot-active"></span>
+                </div>
+                <div class="user-brand-info">
+                    <span class="user-welcome">Abraham F.</span>
+                    <span onclick="BeezUI.switchView('settings')" class="view-profile-link">Voir le profil ❯</span>
+                </div>
             </div>
-            <div class="user-badge-profile">
-                <span id="user-avatar-display">🧬</span>
-                <span id="user-pseudo-display" class="gold-text">Abeille...</span>
+
+            <div class="search-central-zone">
+                <div class="search-bar-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Recherche une tâche, un projet..." id="global-search-input">
+                </div>
+                <button onclick="BeezUI.switchView('settings')" class="btn-quick-settings" title="Paramètres rapides">
+                    <span class="settings-slider-icon">⚙️</span>
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- NAVIGATION LATÉRALE DYNAMIQUE INJECTÉE PAR LE SCRIPT JS -->
+
+    <!-- ZONE DE CONTENU PRINCIPAL (LES 8 VUES DES CROQUIS) -->
     <main class="app-main-content">
 
-        <section id="view-dashboard" class="view-section">
-            <div id="community-welcome-banner" class="welcome-premium-banner">
-                <div class="banner-content">
-                    <h2>👑 Devenez une Force Souveraine</h2>
-                    <p>Rejoignez les pôles d'émulation, créez des micro-communautés blindées et lancez des débats chronométrés sous arbitrage de l'IA.</p>
+        <!-- 1. ACCUEIL & ASSISTANT IA -->
+        <section id="view-assistant" class="view-section">
+            <div class="assistant-chat-box">
+                <button class="btn-history-back">🔄 l'historique</button>
+                <div class="assistant-welcome-message">
+                    <h2>Salut Abraham !</h2>
+                    <p class="gold-text">Dis-moi !</p>
                 </div>
-                <button onclick="BeezCommunity.dismissBanner()" class="btn-dismiss">✕</button>
+                <div class="chat-input-row">
+                    <button class="btn-write-request">➕ Écris ta requête ✨</button>
+                </div>
             </div>
+        </section>
 
-            <div class="section-header-flex">
-                <h2>📊 Vos Constantes de Discipline</h2>
-                <span class="badge-status">Actif</span>
+        <!-- 2. MON AGENDA -->
+        <section id="view-agenda" class="view-section" style="display: none;">
+            <div class="agenda-layout-grid">
+                <div class="agenda-compact-calendar">
+                    <h3>📅 Mon Agenda</h3>
+                    <button class="btn-add-event">Agouter un événement</button>
+                    <div class="calendar-days-strip">
+                        <span class="day-node">1</span><span class="day-node">2</span><span class="day-node">3</span>
+                        <span class="day-node">4</span><span class="day-node active">5</span><span class="day-node">6</span>
+                        <span class="day-node">7</span><span class="day-node">8</span><span class="day-node">9</span>
+                    </div>
+                </div>
+                <div class="agenda-month-notes">
+                    <h4>Juin</h4>
+                    <ul class="month-bullet-list">
+                        <li>1 : école</li>
+                        <li>2 : libre</li>
+                        <li>3 : libre</li>
+                        <li>5 : hôpital</li>
+                        <li>6 : libre</li>
+                    </ul>
+                    <span class="bee-mascot-corner">🐝</span>
+                </div>
             </div>
             
-            <div class="stats-grid-dashboard">
-                <div class="stat-mini-card">
-                    <span class="stat-icon">🔥</span>
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">Focus Synaptique</div>
+            <!-- Carte Mentale Organique Rectifiée -->
+            <div class="mental-map-section">
+                <h3>Carte mentale <span class="sub-label">(Visualisez votre feuille de route)</span></h3>
+                <p class="month-indicator">Avril</p>
+                <div class="organic-road-canvas">
+                    <svg class="road-curve-svg" viewBox="0 0 500 100">
+                        <path d="M 10 50 Q 130 5, 250 50 T 490 50" fill="none" stroke="#ffbc00" stroke-width="3" stroke-dasharray="6"/>
+                    </svg>
+                    <span class="node-checkpoint point-1" data-info="08h00 : Jalon 1"></span>
+                    <span class="node-checkpoint point-2" data-info="14h00 : Jalon 2"></span>
+                    <span class="node-checkpoint point-3" data-info="20h30 : Jalon 3"></span>
                 </div>
-                <div class="stat-mini-card">
-                    <span class="stat-icon">👑</span>
-                    <div class="stat-value">Élite</div>
-                    <div class="stat-label">Statut Matricule</div>
+            </div>
+        </section>
+
+        <!-- 3. MES STATS -->
+        <section id="view-stats" class="view-section" style="display: none;">
+            <h2>📊 Mes Stats</h2>
+            <div class="stats-card-box">
+                <p class="stat-highlight">Montrer faible les Mardi à 20h</p>
+                <div class="bar-chart-discipline">
+                    <div class="bar-col" style="height: 40%;"><span class="bar-day">Mardi 18h</span></div>
+                    <div class="bar-col" style="height: 90%;"><span class="bar-day">Mardi 19h</span></div>
+                    <div class="bar-col active" style="height: 25%;"><span class="bar-day">Mardi 20h</span></div>
+                    <div class="bar-col" style="height: 85%;"><span class="bar-day">Mardi 21h</span></div>
+                </div>
+                <div class="stats-bottom-row">
+                    <div class="pie-chart-placeholder"></div>
+                    <div class="stats-legends">
+                        <p>🎯 Taux de lecture (1 mois)</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="view-community" class="view-section" style="display: none;">
+        <!-- 4. COMMUNAUTÉS -->
+        <section id="view-communities" class="view-section" style="display: none;">
             <div class="section-header-flex">
-                <h2>👥 Vos Boîtes d'Émulation Active</h2>
-                <button onclick="BeezUI.openModal('community-modal')" class="btn-premium" style="width: auto; margin: 0;">➕ Fonder un Pôle</button>
+                <h2>👥 Communautés</h2>
+                <div class="comm-actions">
+                    <button class="btn-sub-action">Rechercher une commu</button>
+                    <button class="btn-sub-action gold">Créer une communauté</button>
+                </div>
             </div>
-            <div id="communities-grid-container" class="communities-grid"></div>
+            <div class="communities-vertical-list">
+                <div class="comm-item-strip">
+                    <span class="hexagon-icon">⬢</span>
+                    <div class="comm-info">
+                        <h4>Stopper la distraction</h4>
+                        <div class="comm-buttons">
+                            <button class="btn-action-view">Visiter</button>
+                            <button class="btn-action-join">Rejoindre</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="comm-item-strip">
+                    <span class="hexagon-icon">⬢</span>
+                    <div class="comm-info">
+                        <h4>Les jeûneurs du Mardi</h4>
+                        <p class="comm-sub-text">En séance de méditation</p>
+                        <div class="comm-buttons">
+                            <button class="btn-action-view">Visiter</button>
+                            <button class="btn-action-join">Rejoindre</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="comm-item-strip">
+                    <span class="hexagon-icon">⬢</span>
+                    <div class="comm-info">
+                        <h4>Club de lecture</h4>
+                        <p class="comm-sub-text live">🔴 En plein live minuté</p>
+                        <button class="btn-action-view method-member">Vous êtes membre</button>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="view-live" class="view-section" style="display: none;">
+        <!-- 5. MES PROJETS -->
+        <section id="view-projects" class="view-section" style="display: none;">
             <div class="section-header-flex">
-                <h2>🎙️ Salons de Concentration & Débats</h2>
+                <h2>📁 Mes Projets</h2>
+                <button class="btn-share-project">Partager le projet</button>
             </div>
-            <div class="live-empty-state">
-                <div class="live-pulse-radar"></div>
-                <h3>Aucun débat conflictuel actif</h3>
-                <p style="color: var(--color-muted); max-width: 400px; margin: 10px auto 20px;">
-                    Entrez dans une boîte de communauté ci-dessus pour initier une session vocale WebRTC avec vos pairs sous arbitrage de l'IA.
-                </p>
+            <button class="btn-new-project-trigger">Commencer un nouveau projet</button>
+            
+            <div class="project-box-item management-card">
+                <div class="project-title-row">
+                    <h3>Projet restaurant</h3>
+                    <button class="btn-project-validate">Valider</button>
+                </div>
+                <p class="project-status-text">✓ Déjà 20 tables</p>
+                <p class="project-alert-text">Reste 20 tables évitables</p>
+                <button class="btn-project-delete">Supprimer</button>
+            </div>
+
+            <div class="project-box-item management-card">
+                <h3>Projet forets</h3>
+                <p class="project-status-text">Aucune tâche effectuée</p>
+                <p class="project-alert-text time">Reste 10 jours</p>
+                <div class="project-notes-footer">
+                    <span>Notes</span> <button class="btn-add-note">+</button>
+                </div>
             </div>
         </section>
 
-        <section id="view-agenda" class="view-section" style="display: none;">
-            <div class="section-header-flex">
-                <h2>📅 Itinéraire Chrono-Mental</h2>
-            </div>
-            </section>
-
+        <!-- 6. MES TÂCHES -->
         <section id="view-tasks" class="view-section" style="display: none;">
             <div class="section-header-flex">
-                <h2>🔒 Actions de Focus Isolées</h2>
+                <h2>✔️ Mes Tâches</h2>
+                <button class="btn-share-task">Partager avec un binôme</button>
             </div>
-            <div id="tasks-container"></div>
+            
+            <div class="task-row-card">
+                <div class="task-main-info">
+                    <span class="task-icon-type">🍞</span>
+                    <h4>Acheter pain</h4>
+                    <button class="btn-close-task">✕</button>
+                </div>
+                <div class="task-metadata-tags">
+                    <span class="tag-binome">Binôme de voyage : Maman</span>
+                    <span class="tag-binome">Binôme de supervision : Papa</span>
+                </div>
+            </div>
+
+            <div class="task-row-card text-block">
+                <h4>Lire une heure en communauté</h4>
+                <div class="task-time-binome-row">
+                    <span class="task-time-badge">10 H 30</span>
+                    <div class="binome-stack">
+                        <span>Binôme : Maman</span>
+                        <strong>Alan</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. MES OBJECTIFS -->
+        <section id="view-objectifs" class="view-section" style="display: none;">
+            <h2>🎯 Objectif</h2>
+            <div class="objective-focus-box">
+                <div class="objective-display-main">Lire souvent</div>
+                <div class="objective-details-tags">
+                    <p>Binôme : Élie</p>
+                    <p>Progression : <span class="status-low">Faible</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. PARAMÈTRES -->
+        <section id="view-settings" class="view-section" style="display: none;">
+            <h2>⚙️ Paramètres</h2>
+            <div class="settings-options-list">
+                <div class="setting-row-item">
+                    <span>🌐 Langues et traduction</span>
+                    <span class="arrow-indicator">❯</span>
+                </div>
+                <div class="setting-row-item">
+                    <span>🔄 Mode</span>
+                    <span class="arrow-indicator">❯</span>
+                </div>
+                <div class="setting-row-item">
+                    <span>🎨 Thème</span>
+                    <span class="arrow-indicator">❯</span>
+                </div>
+                <p class="settings-footer-note">Etc. (tu peux ajouter dans la photo)</p>
+            </div>
         </section>
 
     </main>
-
-    <nav class="bottom-dock-nav">
-        <button id="nav-dashboard" class="nav-item active" onclick="BeezUI.switchView('dashboard')">
-            <span class="nav-icon">📊</span><span class="nav-text">Focus</span>
-        </button>
-        <button id="nav-community" class="nav-item" onclick="BeezUI.switchView('community')">
-            <span class="nav-icon">👥</span><span class="nav-text">Boîtes</span>
-        </button>
-        <button id="nav-live" class="nav-item" onclick="BeezUI.switchView('live')">
-            <span class="nav-icon">🎙️</span><span class="nav-text">Lives</span>
-        </button>
-        <button id="nav-agenda" class="nav-item" onclick="BeezUI.switchView('agenda')">
-            <span class="nav-icon">🗺️</span><span class="nav-text">Itinéraire</span>
-        </button>
-        <button id="nav-tasks" class="nav-item" onclick="BeezUI.switchView('tasks')">
-            <span class="nav-icon">🔒</span><span class="nav-text">Actions</span>
-        </button>
-    </nav>
-
-    <div id="community-modal" class="modal-overlay">
-        <div class="modal-card">
-            <h3>Fonder une Communauté d'Émulation</h3>
-            <p style="color: var(--color-muted); font-size: 0.8rem; margin-bottom: 15px;">Établissez un pôle d'entraide souverain.</p>
-            
-            <input type="text" id="comm-name" placeholder="Nom du pôle (ex: Codeurs Inflexibles)" class="premium-input">
-            <textarea id="comm-desc" placeholder="Objectif collectif et règles de sanctions de la communauté..." class="premium-input" style="height: 80px; resize: none;"></textarea>
-            
-            <select id="comm-access-type" class="premium-input" onchange="BeezCommunity.togglePriceInput()">
-                <option value="public">🌍 Accès Public (Gratuit)</option>
-                <option value="paid">👑 Accès Premium / Payant</option>
-            </select>
-            
-            <div id="comm-price-zone" style="display: none; margin-top: 10px;">
-                <input type="number" id="comm-price" placeholder="Prix d'entrée (en EUR)" class="premium-input" value="15">
-            </div>
-
-            <button onclick="BeezCommunity.createCommunity()" class="btn-premium" style="margin-top: 20px;">⚡ Sceller la fondation</button>
-            <button onclick="BeezUI.closeModal('community-modal')" class="btn-gold" style="background: transparent; box-shadow: none; border: none; margin-top: 5px; color: var(--color-muted);">Annuler</button>
-        </div>
-    </div>
-
-    <div id="ia-welcome-modal" class="modal-overlay" style="display: none;">
-        <div class="modal-card">
-            <div class="ia-avatar-pulse">🧬</div>
-            <h3>Contrôle Synaptique Initial</h3>
-            <p style="color: var(--color-muted); font-size: 0.85rem; margin-top: 5px;">
-                Je suis votre IA de discipline. Évaluez honnêtement votre état psychologique actuel avant d'entrer dans la ruche.
-            </p>
-            
-            <textarea id="ia-mood-input" placeholder="Ex: Je me sens fatigué et un peu distrait aujourd'hui..." class="premium-input" style="height: 70px; margin-top: 15px; resize: none;"></textarea>
-            
-            <div id="ia-recommendation-zone" style="display: none; margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; border-left: 3px solid var(--color-gold);">
-                <p id="ia-response-text" style="font-size: 0.85rem; text-align: left; line-height: 1.4; color: var(--color-text-pure);"></p>
-            </div>
-
-            <div id="ia-action-buttons" style="margin-top: 20px; width: 100%;">
-                <button onclick="BeezIA.analyzeInitialMood()" class="btn-premium">Analyse Algorithmique</button>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
